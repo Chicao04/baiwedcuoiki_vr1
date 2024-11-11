@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Sinh Viên Đã Được Chấp Nhận</title>
+    <style type="text/css">
+        .quaylai button{
+            width: 100px ;
+            height: 60px ;
+            margin-top: 10px;
+            background-color: #cf6363;
+        }
+        body{
+            margin: 0;
+            padding: 0 ; 
+            background-color: aqua;
+        }
+        .khoi1{
+            width: 1000px ;
+            padding: 30px ;
+            margin: 0 auto;    
+            background-color: white;
+        }
+        .student-info{
+            padding: 10px 0;
+            margin-bottom: 10px ;
+        } 
+        table {
+        width: 100%;
+        max-width: 1000px;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+
+      th,
+      td {
+        padding: 0.75rem;
+        border: 1px solid #1e3a8a;
+        text-align: left;
+      }
+
+      th {
+        background-color: #1e40af;
+        color: #ffffff;
+      }
+
+      td {
+        background-color: #ffffff;
+      }
+    </style>
+</head>
+<body>
+    <div class="khoi1">
+        <h1>Danh Sách Sinh Viên Đã Được Chấp Nhận</h1>
+        <table id="infoTable">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Họ tên</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Điểm lớp 10</th>
+                <th>Điểm lớp 11</th>
+                <th>Điểm lớp 12</th>
+
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        <div class = "quaylai">
+            <a href="./quanlihoso.html"><button>Quay lại</button></a>
+        </div>
+    </div>
+    <script>
+        // Lấy dữ liệu từ localStorage với key là "students" và chuyển từ chuỗi JSON thành mảng đối tượng.
+        // Nếu localStorage chưa có dữ liệu "students", gán students là một mảng rỗng.
+        const students = JSON.parse(localStorage.getItem("students")) || [];
+        const tableBody = document.getElementById("tableBody");
+        function displayAddStudent(){
+            tableBody.innerHTML= "" ;  // Hiển thị chuỗi
+
+             // Duyệt qua mảng students để thêm từng sinh viên vào bảng
+            students.forEach((student,o) => {
+                if (student.status === "accepted") {
+                   // Tạo hàng mới cho mỗi sinh viên đã được chấp nhận
+                  const row  = document.createElement("tr"); 
+
+                  //Thêm các ô dữ liệu vào bảng
+                  row.innerHTML = `
+                     <td>${o + 1}</td>
+                        <td>${student.hoTen}</td>
+                        <td>${student.email}</td>
+                        <td>${student.sdt}</td>
+                        <td>${student.ngaySinh}</td>
+                        <td>${student.gioiTinh}</td>
+                        <td>${student.diem10}</td>
+                        <td>${student.diem11}</td>
+                        <td>${student.diem12}</td>
+                        <td><button onclick = "deletStudent(${o})">Xóa</button></td>
+                      `;   
+                    //Thêm hàng vào tbody của bảng
+                    tableBody.appendChild(row);
+                }
+          });
+        }
+        function deletStudent(o){
+            students.splice(o,1)// Xóa đối tượng o trong trong mảng 
+            localStorage.setItem("students", JSON.stringify(students)) // cập nhập lại localStorage
+            displayAddStudent(); //Hiển thị lại thông tin sao khi refesh 
+            alert("Đã xóa thông tin sinh viên")
+        }
+
+        //gọi hàm 
+        displayAddStudent();
+        
+
+    </script>
+</body>
+</html>

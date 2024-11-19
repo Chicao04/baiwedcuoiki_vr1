@@ -188,6 +188,26 @@ button:active{
     font-size: 25px;
     
 }
+.password-container {  
+    position: relative;  
+    width: 100%;  
+    margin-left: -30px;
+}  
+
+.password-container input {  
+    width: 100%;  
+    padding: 10px;  
+    font-size: 14px;  
+    border: 1px solid #ccc;  
+}  
+
+.password-container .eye {  
+    position: absolute;  
+    color: #696666;
+    right: 2px;  
+    top: 20px;  
+    cursor: pointer;  
+}
 /* .area{
     background: rgb(185, 67, 67);  
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  

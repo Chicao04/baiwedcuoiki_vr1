@@ -20,6 +20,10 @@
             <a href="./quanlihoso.html"><button>Quay lại</button></a>
     </div>
     <script>
+
+        const adminAccount = {
+            user_0: JSON.stringify({account: "cao", email: "cao@gamil.com" , password : "cao123456"})
+        }
         const students = JSON.parse(localStorage.getItem("students")) || [];
         const pendingRequests = document.getElementById("pendingRequests");
 
@@ -32,6 +36,7 @@
                         <p>Họ và tên: ${student.hoTen}</p>
                         <p>Email: ${student.email}</p>
                         <p>Số điện thoại: ${student.sdt}</p>
+                        <p>Số CMND/CCCD: ${student.cccd}</p>
                         <p>Ngày sinh: ${student.ngaySinh}</p>
                         <p>Giới tính: ${student.gioiTinh}</p>
                         <p>Điểm lớp 10: ${student.diem10}</p>
